@@ -7,17 +7,12 @@
     class="text-white px-2 py-1 bg-[#2E3353] shadow-2xl rounded-lg ring-1 ring-black ring-opacity-15 border-none text-lg outline-none focus:ring-red-500"
     type="text"
     placeholder="Salamèche"
+    [(ngModel)]="search"
+    (ngModelChange)="onGetByName($event)"
   />
-  <!-- <select
-    class="rounded-lg text-xs px-1 bg-[#2E3353] text-white ring-1 max-w-2xl ring-black ring-opacity-15 outline-none"
-    name=""
-    id=""
-  >
-    <option value=""></option>
-  </select> -->
 </div>
 <div
-  class="grid grid-cols-2 max-w-xs md:grid md:grid-cols-4 md:max-w-2xl lg:grid lg:grid-cols-5 lg:max-w-4xl mx-auto gap-5"
+  class="font-dm grid grid-cols-2 max-w-xs md:grid md:grid-cols-4 md:max-w-2xl lg:grid lg:grid-cols-5 lg:max-w-5xl mx-auto gap-5"
 >
   @for (p of pokemon(); track p) {
   <app-card
@@ -32,6 +27,8 @@
   </app-card>
   }
 </div>
+
+@if (search === '') {
 <div class="flex flex-wrap justify-center mx-auto gap-2 my-10">
   @for(a of pokemonList(); track a; let i =$index) {
   <button
@@ -44,3 +41,4 @@
 
   }
 </div>
+}

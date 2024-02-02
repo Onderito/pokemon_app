@@ -5,6 +5,7 @@ import {
   Talent,
   Type,
   Sprite,
+  PokemonJson,
 } from '../types/pokemon';
 import { StatDTO } from './stat';
 import { ResistanceDTO } from './resistance';
@@ -13,9 +14,6 @@ import { SpriteDTO } from './sprite';
 import { TalentDTO } from './talent';
 
 export class PokemonDTO implements Pokemon {
-  static fromJson(pokemon: PokemonJson): any {
-    throw new Error('Method not implemented.');
-  }
   id: Number;
   category: string;
   name: string;
@@ -25,7 +23,7 @@ export class PokemonDTO implements Pokemon {
   weight: string;
   stats: Stat;
   resistances: Resistance[];
-  sprites: Sprite[];
+  sprites: Sprite;
 
   constructor(pokemon: {
     id: Number;
@@ -37,7 +35,7 @@ export class PokemonDTO implements Pokemon {
     weight: string;
     stats: Stat;
     resistances: Resistance[];
-    sprites: Sprite[];
+    sprites: Sprite;
   }) {
     this.id = pokemon.id;
     this.category = pokemon.category;
@@ -51,13 +49,13 @@ export class PokemonDTO implements Pokemon {
     this.sprites = pokemon.sprites;
   }
 
-  /*   static fromJson(pokemon: PokemonJson) {
+  static fromJson(pokemon: PokemonJson) {
     const stats = StatDTO.fromJson(pokemon.stats);
     const resistances = pokemon.resistances.map((p) =>
-      ResistanceDTO.fromJson({ mutiplier: p.multiplier, name: p.name })
+      ResistanceDTO.fromJson({ multiplier: p.multiplier, name: p.name })
     );
-    const sprites = pokemon.sprites.map((p) => SpriteDTO.fromJson(p));
-    const type = pokemon.type.map((p) => TypeDTO.fromJson(p));
+    const sprites = SpriteDTO.fromJson(pokemon.sprites);
+    const type = pokemon.types.map((p) => TypeDTO.fromJson(p));
     const talent = pokemon.talent.map((p) => TalentDTO.fromJson(p));
     return new PokemonDTO({
       id: pokemon.pokedexId,
@@ -71,29 +69,5 @@ export class PokemonDTO implements Pokemon {
       resistances,
       sprites,
     });
-  } */
-}
-
-export interface PokemonJson {
-  pokedexId: Number;
-  category: string;
-  name: {
-    fr: string;
-    en: string;
-    jp: string;
-  };
-  sprites: Sprite;
-  types: Type[];
-  talent: Talent[];
-  height: string;
-  weight: string;
-  resistances: Resistance[];
-  stats: {
-    hp: Number | null;
-    atk: Number | null;
-    def: Number | null;
-    spe_atk: Number | null;
-    spe_def: Number | null;
-    vit: Number | null;
-  };
+  }
 }

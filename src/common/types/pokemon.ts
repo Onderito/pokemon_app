@@ -39,3 +39,29 @@ export interface Sprite {
   shiny: string | null;
   gmax: string | null;
 }
+
+export type GroupesPokemon = Array<PokemonJson[]>;
+
+export interface PokemonJson {
+  pokedexId: Number;
+  category: string;
+  name: {
+    fr: string;
+    en: string;
+    jp: string;
+  };
+  sprites: Sprite;
+  types: Type[];
+  talent: Talent[];
+  height: string;
+  weight: string;
+  resistances: Resistance[];
+  stats: {
+    hp: Number | null;
+    atk: Number | null;
+    def: Number | null;
+    spe_atk: Number | null;
+    spe_def: Number | null;
+    vit: Number | null;
+  };
+}
